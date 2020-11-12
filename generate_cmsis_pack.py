@@ -36,9 +36,9 @@ from os.path import isfile, join
 import fnmatch
 
 run_path = os.getcwd()
-tf_path = run_path + "/tensorflow"
+tf_path = ""
 outpath = run_path + "/gen/"
-kernelpath = tf_path + "/tensorflow/lite/micro/kernels/"
+kernelpath = "" 
 pack_build = outpath + "build"
 utilities_dir = outpath + "utilities"
 
@@ -132,8 +132,14 @@ def load_list_from_file (filename):
   return "".split(" ")
 
 def main(unparsed_args, flags):
-  """"""
-  """Generates a pdsc file from a template source."""
+  global tf_path 
+  global kernelpath 
+
+  tf_path = flags.tensorflow_path
+  kernelpath = tf_path + "/tensorflow/lite/micro/kernels/"
+
+  print (tf_path)
+  print (kernelpath)
 
   prepare_environment()
 
