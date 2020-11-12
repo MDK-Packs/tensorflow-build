@@ -92,7 +92,7 @@ def prepare_environment():
   copyfile(tf_path+"/LICENSE", pack_build+"/LICENSE")
 
 def get_version ():
-  test_str = open(os.getcwd() +"/tensorflow/tensorflow/tools/pip_package/setup.py").read()
+  test_str = open(tf_path + "/tensorflow/tools/pip_package/setup.py").read()
   regex = r"(?<=_VERSION = ).*"
   matches = re.search(regex, test_str, re.MULTILINE)
   ret = matches.group().replace("'","") 
