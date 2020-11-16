@@ -12,11 +12,22 @@
       TensorFlow %{RELEASE_VERSION}%
     </release>
   </releases>
+
   <taxonomy>
     <description Cclass="Machine Learning">Software Components for Machine Learning</description>
   </taxonomy>
+
+  <conditions>
+    <condition id="CMSIS-NN">
+
+    </condition>
+    <condition id="Kernel Utils">
+      <require Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel Utils" />
+    </condition>
+  </conditions>
+
   <components>
-    <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel" Cvariant="Reference" Cversion="%{RELEASE_VERSION}%">
+    <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel" Cvariant="Reference" Cversion="%{RELEASE_VERSION}%" condition="Kernel Utils">
       <description>TensorFlow Lite Micro Library</description>
       <RTE_Components_h>
         <!-- the following content goes into file 'RTE_Components.h' -->
@@ -31,7 +42,7 @@
         <file category="include" name="./"/>
       </files>
     </component>
-    <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel" Cvariant="CMSIS-NN" Cversion="%{RELEASE_VERSION}%">
+    <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel" Cvariant="CMSIS-NN" Cversion="%{RELEASE_VERSION}%" condition="Kernel Utils" >
       <description>TensorFlow Lite Micro Library</description>
       <RTE_Components_h>
         <!-- the following content goes into file 'RTE_Components.h' -->
@@ -46,7 +57,7 @@
         <file category="include" name="./"/>
       </files>
     </component>
-    <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel" Cvariant="Ethos-U" Cversion="%{RELEASE_VERSION}%">
+    <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel" Cvariant="Ethos-U" Cversion="%{RELEASE_VERSION}%" condition="Kernel Utils">
       <description>TensorFlow Lite Micro Library</description>
       <RTE_Components_h>
         <!-- the following content goes into file 'RTE_Components.h' -->
@@ -61,7 +72,13 @@
         <file category="include" name="./"/>
       </files>
     </component>
-
+     <!-- this component can be merged into the Kernel components, when duplicate module name issue is solved elsewhere -->
+    <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Kernel Utils" Cversion="%{RELEASE_VERSION}%">
+      <description>TensorFlow Lite Micro Library</description>
+      <files>
+        <file category="sourceCpp" name="tensorflow/lite/kernels/kernel_util.cc"/>
+      </files>
+    </component>
     <component Cclass="Machine Learning" Cgroup="TensorFlow" Csub="Testing" Cversion="%{RELEASE_VERSION}%">
       <description>TensorFlow Lite Micro Library</description>
       <RTE_Components_h>
@@ -76,3 +93,4 @@
 
   </components>
 </package>
+

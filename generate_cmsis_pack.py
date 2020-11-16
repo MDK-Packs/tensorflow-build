@@ -116,7 +116,8 @@ def make_component_file_list (srcs_list):
       continue
     basename = sanitize_xml(os.path.basename(src))
     clean_src = sanitize_xml(src)
-    replace_srcs += '        <file category=\"'+ category +'\" name=\"' + src + '\"/> \n'
+    if src != "tensorflow/lite/kernels/kernel_util.cc":
+      replace_srcs += '        <file category=\"'+ category +'\" name=\"' + src + '\"/> \n'
     dest_fpath = pack_build+'/'+src
     os.makedirs(os.path.dirname(dest_fpath), exist_ok=True)
     copyfile(tf_path+'/'+src, dest_fpath)
