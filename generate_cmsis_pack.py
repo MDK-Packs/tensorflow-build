@@ -116,7 +116,7 @@ def make_component_file_list (srcs_list):
       continue
     basename = sanitize_xml(os.path.basename(src))
     clean_src = sanitize_xml(src)
-    if src != "tensorflow/lite/kernels/kernel_util.cc":
+    if src != "tensorflow/lite/kernels/kernel_util.cc" and src.endswith("_test.cc") == False:
       replace_srcs += '        <file category=\"'+ category +'\" name=\"' + src + '\"/> \n'
     dest_fpath = pack_build+'/'+src
     os.makedirs(os.path.dirname(dest_fpath), exist_ok=True)
@@ -163,8 +163,8 @@ def main(unparsed_args, flags):
   all_ethos_srcs_list.sort()
 
   #get --testsrcs and --testhdrs from arguments
-  test_srcs_list = six.ensure_str(flags.testsrcs).split(' ')
-  test_hdrs_list = six.ensure_str(flags.testhdrs).split(' ')
+  test_srcs_list = load_list_from_file(flags.testsrcs)
+  test_hdrs_list = load_list_from_file(flags.testhdrs)
   all_test_srcs_list = test_srcs_list + test_hdrs_list
   all_test_srcs_list.sort()
 
